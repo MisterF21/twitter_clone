@@ -13,6 +13,7 @@ class UsersController < ApplicationController
     if @user.save
       respond_to do |format|
         format.html do
+          UserMailer.signup_confirmation(@user).deliver
           flash[:notice] = "Signup successful."
           redirect_to root_url
         end
