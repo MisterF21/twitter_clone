@@ -11,9 +11,11 @@ class UsersController < ApplicationController
   def create
     @user = User.new user_params
     if @user.save
-      flash[:notice] = "Signup successful."
       respond_to do |format|
-        format.html { redirect_to root_url }
+        format.html do
+          flash[:notice] = "Signup successful."
+          redirect_to root_url
+        end
         format.js
       end
     else
@@ -33,8 +35,13 @@ class UsersController < ApplicationController
   def update
     @user = User.find params[:id]
     if @user.update user_params
-      flash[:notice] = "User has been updated!"
-      redirect_to root_url
+      respond_to do |format|
+        format.html do
+          flash[:notice] = "Edit successful."
+          redirect_to root_url
+        end
+        format.js
+      end
     else
       flash[:alert] = "User not updated. Please try again."
       render 'edit'

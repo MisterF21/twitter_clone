@@ -1,0 +1,7 @@
+$('.edit_user').remove();
+$('#update_user').show();
+$('#show_username').replaceWith('<h2><%= @user.username %></h2>')
+$('#show_email').replaceWith('<h3><%= @user.email %></h3>')
+$('#users').append('<%= j render @user %>');
+
+
